@@ -6,7 +6,11 @@ from django.contrib.auth.decorators import login_required
 
 @login_required(login_url='sign-in')
 def Index(request):
-    return render(request, 'waiter/index.html')
+    user = request.user
+    if user.type == 3:
+        return render(request, 'waiter/index.html')
+    else:
+        return redirect('sign-in')
 
 @login_required(login_url='sign-in')
 def Orders(request):
@@ -14,16 +18,24 @@ def Orders(request):
         'order': Order.objects.filter(delivery=False, done=False),
         'delivery': Order.objects.filter(delivery=True, done=False),
     }
-    return render(request, 'waiter/orders.html', context)
+    if user.type == 3:
+        return render(request, 'waiter/orders.html', context)
+    else:
+        return redirect('sign-in')
+
 
 
 @login_required(login_url='sign-in')
 def Order_items(request):
+    user = request.user
     con = {
         'user': request.user,
         'order_item': OrderItem.objects.all().order_by('-id')
     }
-    return render(request, 'waiter/order_item.html', con)
+    if user.type == 3:
+        return render(request, 'waiter/order_item.html', con)
+    else:
+        return redirect('sign-in')
 
 
 
@@ -45,7 +57,11 @@ def Add_order_item(request, pk):
             meal_quantity = request.POST.get('meal_quantity')
             OrderItem.objects.create(order_id=order.id, maxsulot_id=maxsulot, quantity=quantity, meal_id=meal, meal_quantity=meal_quantity)
             return redirect('order')
-    return render(request, 'waiter/add_order_item.html', con)
+    if user.type == 3:
+        return render(request, 'waiter/add_order_item.html', con)
+    else:
+        return redirect('sign-in')
+
 
 
 @login_required(login_url='sign-in')
@@ -76,7 +92,11 @@ def Update_order_item(request, pk):
             order.meal_quantity = meal_quantity
             order.save()
             return redirect('order_item')
-    return render(request, 'waiter/update_order_item.html', con)
+    if user.type == 3:
+        return render(request, 'waiter/update_order_item.html', con)
+    else:
+        return redirect('sign-in')
+
 
 def Done_order(request, pk):
     user = request.user
@@ -85,7 +105,10 @@ def Done_order(request, pk):
         if order.done == False:
             order.done = True
             order.save()
-    return redirect('order')
+    if user.type == 3:
+        return redirect('order')
+    else:
+        return redirect('sign-in')
 
 
 
