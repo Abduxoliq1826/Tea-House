@@ -33,7 +33,7 @@ class Maxsulot(models.Model):
 class Order(models.Model):
     room = models.ForeignKey(Room, on_delete=models.CASCADE, null=True, blank=True)
     delivery = models.BooleanField(default=False)
-    owner = models.ForeignKey(Client, on_delete=models.CASCADE)
+    owner = models.CharField(max_length=255)
     address = models.CharField(max_length=1000, null=True, blank=True)
     date = models.DateField(null=True, blank=True)
     delivery_date = models.DateTimeField(null=True, blank=True)
