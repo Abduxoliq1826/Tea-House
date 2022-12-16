@@ -1,0 +1,109 @@
+{% extends 'waiter/base.html' %}
+{% block content %}
+		<!--end header -->
+		<!--start page wrapper -->
+			<div class="page-content">
+				<!--breadcrumb-->
+				<div class="card">
+					<div class="card-body">
+						<div class="d-lg-flex align-items-center mb-4 gap-3">
+							<div class="position-relative">
+								<input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+							</div>
+						</div>
+						<div class="btn-group" role="group" aria-label="Basic example">
+							<button type="button" id="orders" class="btn btn-outline-primary">Order</button>
+							<button type="button" id="delivers" class="btn btn-outline-primary" style="margin-left: 1rem">Delivery</button>
+						</div>
+						<div class="table-responsive" id="order_tab" style="display: none">
+							<table class="table mb-0">
+								<thead class="table-light">
+									<tr>
+										<th> </th>
+										<th>Owner</th>
+										<th>Room number</th>
+										<th>Date</th>
+										<th>Service</th>
+										<th>Total price</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for i in order %}
+									<tr>
+										<td><a href="{% url 'done_order' i.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M9.999 13.587 7.7 11.292l-1.412 1.416 3.713 3.705 6.706-6.706-1.414-1.414z"></path></svg></a></td>
+										<td>
+											<div class="d-flex align-items-center">
+												<div class="ms-2">
+													<h6 class="mb-0 font-14">{{ i.owner.phone }}</h6>
+												</div>
+											</div>
+										</td>
+										<td>{{ i.room.number }} <div class="badge rounded-pill text-success bg-light-success p-2 text-uppercase px-3"><i class="fadeIn animated bx bx-group"></i>{{ i.room.people }}</div></td>
+										<td>{{ i.date }}</td>
+										<td>
+											<div class="d-flex order-actions">
+												<a href="{% url 'add_order_item' i.id %}"><button type="button" class="btn btn-primary btn-sm radius-30 px-4">Service</button></a>
+											</div>
+										</td>
+										<td>{{ i.total_price }}</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+						<div class="table-responsive" id="delivery_tab" style="display: none">
+							<table class="table mb-0">
+								<thead class="table-light">
+									<tr>
+										<th> </th>
+										<th>Owner</th>
+										<th>Dete</th>
+										<th>Address</th>
+										<th>Service</th>
+										<th>Total price</th>
+									</tr>
+								</thead>
+								<tbody>
+								{% for i in delivery %}
+								<tr>
+									<td><a href="{% url 'done_order' i.id %}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(0, 0, 0, 1);transform: ;msFilter:;"><path d="M12 2C6.486 2 2 6.486 2 12s4.486 10 10 10 10-4.486 10-10S17.514 2 12 2zm0 18c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8z"></path><path d="M9.999 13.587 7.7 11.292l-1.412 1.416 3.713 3.705 6.706-6.706-1.414-1.414z"></path></svg></a></td>
+								<td>
+								<div class="d-flex align-items-center">
+												<div class="ms-2">
+													<h6 class="mb-0 font-14">{{ i.owner.phone }}</h6>
+												</div>
+											</div>
+										</td>
+										<td>{{ i.delivery_date }}</td>
+										<td>{{ i.address }}</td>
+										<td>
+											<div class="d-flex order-actions">
+												<a href="{% url 'add_order_item' i.id %}"><button type="button" class="btn btn-primary btn-sm radius-30 px-4">Service</button></a>
+											</div>
+										</td>
+										<td>{{ i.total_price }}</td>
+									</tr>
+								{% endfor %}
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+		</div>
+		<!--end page wrapper -->
+		<!--start overlay-->
+		<div class="overlay toggle-icon"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+		<footer class="page-footer">
+			<p class="mb-0">Copyright © 2021. All right reserved.</p>
+		</footer>
+	</div>
+
+	<!--end wrapper-->
+{% endblock %}
+

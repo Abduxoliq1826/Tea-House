@@ -1,0 +1,85 @@
+{% extends 'cooker/base.html'%}
+{%load static%}
+{% block content %}
+<style>
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 64px;
+  height: 38px;
+}
+
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 30px;
+  width: 30px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 38px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+</style>
+<div class="page-content">
+	<div class="row mt-3">
+	   <div class="col-12 col-lg-12">
+		  <div class="card radius-5">
+			  <form class="row m-auto" action="{% url 'cooker_check_maxsulot' maxsulot.id %}" method="post">
+				  {% csrf_token %}
+				  <div class="col-6 mt-4">
+					  <label class="switch">
+						  <input type="checkbox" style="padding-bottom: 10px" >
+						  <span class="slider round"></span>
+					  </label>
+				  </div>
+				  <div class="col-6 mt-4" style="margin-bottom: 29px">
+					  <button type="submit" class="btn btn-info px-5">Save</button>
+				  </div>
+			  </form>
+		  </div>
+	   </div>
+	</div>
+</div>
+{% endblock %}

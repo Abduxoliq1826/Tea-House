@@ -1,0 +1,42 @@
+{% extends 'cooker/base.html'%}
+{%load static%}
+{% block content %}
+    <div class="page-content">
+				<div class="card">
+					<div class="card-body">
+						<div class="d-lg-flex align-items-center mb-4 gap-3">
+							<div class="position-relative">
+								<input type="text" class="form-control ps-5 radius-30" placeholder="Search Order"> <span class="position-absolute top-50 product-show translate-middle-y"><i class="bx bx-search"></i></span>
+							</div>
+						</div>
+						<div class="table-responsive">
+							<table class="table mb-0">
+								<thead class="table-light">
+									<tr>
+										<th>Order#</th>
+										<th>Meal</th>
+										<th>Meal quantity</th>
+										<th>Maxsulot</th>
+										<th>Maxsulot quantity</th>
+									</tr>
+								</thead>
+								<tbody>
+                                {% for i in order_item %}
+									<tr>
+										<td>{{i.order.date}}</td>
+										<td>{{i.meal.name}}</td>
+										<td>{{i.meal_quantity}}</td>
+										<td>{{i.maxsulot.name}}</td>
+										<td>{{i.quantity}}</td>
+									</tr>
+                                {% endfor %}
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+{% endblock %}

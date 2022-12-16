@@ -1,0 +1,88 @@
+{% extends 'director/base.html'%}
+{% load static %}
+{% block content %}
+<div class="page-content">
+	<div class="row mt-3 mb-3">
+	   <div class="col-12 col-lg-12">
+		   <form action="{% url 'director_profile' %}" method="post" enctype="multipart/form-data">
+				{% csrf_token%}
+			   <div class="row">
+					<div class="col-lg-4">
+						<div class="card">
+							<div class="card-body">
+
+								<div class="d-flex flex-column align-items-center text-center">
+									{%if user.image%}
+									<img src="{{user.image.url}}" alt="Admin"  width="160px" height="175px" class="rounded-circle p-1 bg-primary" width="110">
+									{%else%}
+									<img src="{% static 'assets/images/avatars/avatar-2.png'%}" alt="Admin" class="rounded-circle p-1 bg-primary" width="110">
+									{%endif%}
+									<div class="mt-3">
+										<h4>{{user.username}}</h4>
+										<input name="image" type="file" class="col-12" class="form-control" >
+									</div>
+								</div>
+
+
+							</div>
+						</div>
+					</div>
+					<div class="col-lg-8">
+						<div class="card">
+							<div class="card-body">
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Username</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<input type="text" name="username" class="form-control" value="{{user.username}}">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Jobs</h6>
+									</div>
+									<div class="col-sm-9 text-secondary ">
+										<select name="type" class="form-control " aria-label="Default select example">
+											<option value="{{user.type}}">{{user.get_type_display}}</option>
+											<option value="1">Director</option>
+											<option value="2">Cooker</option>
+											<option value="3">Waiter</option>
+											<option value="4">manager</option>
+											<option value="5">Call Center</option>
+										</select>
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Phone</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<input type="text" name="number" class="form-control" value="{{user.number}}">
+									</div>
+								</div>
+								<div class="row mb-3">
+									<div class="col-sm-3">
+										<h6 class="mb-0">Pasword</h6>
+									</div>
+									<div class="col-sm-9 text-secondary">
+										<input type="password" name="password" class="form-control">
+									</div>
+								</div>
+
+								<div class="row">
+									<div class="col-sm-3"></div>
+									<div class="col-sm-9 text-secondary">
+										<input type="submit" class="btn btn-primary px-4" value="Save Changes">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</form>
+	   </div>
+	</div>
+</div>
+
+{% endblock content %}

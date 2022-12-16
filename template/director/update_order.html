@@ -1,0 +1,59 @@
+{% extends 'director/base.html'%}
+{%load static%}
+{% block content %}
+<div class="page-content">
+	<div class="row mt-3">
+	   <div class="col-12 col-lg-12">
+		  <div class="card radius-5">
+			  {% if order.delivery == True %}
+
+			  <form class="row m-auto" action="{% url 'update_delivery' order.id %}" method="post">
+				  {% csrf_token %}
+				  <div class="col-3 mt-4">
+					  <input class="form-control mb-3" name="address" value="{{order.address}}"  type="text" placeholder="address" aria-label="address" >
+				  </div>
+				  <div class="col-3 mt-4">
+					  <input class="form-control mb-3" name="delivery_date" value="{{order.delivery}}"  type="date" placeholder="delivery_date" aria-label="delivery_date" >
+				  </div>
+				  <div class="col-3 mt-4">
+					  <select name="owner" class="form-control  m mb-3" >
+						  {% for i in owner %}
+						  <option value="{{i.id}}"><span class="badge bg-info">{{i.phone}}</span>{{i.name}}</option>
+						  {%endfor%}
+					  </select>
+				  </div>
+				  <div class="col-3 mt-4">
+					  <button type="submit" class="btn btn-info px-5">Save</button>
+				  </div>
+			  </form>
+			  {% else %}
+			  <form class="row " action="{% url 'update_order' order.id %}" method="post">
+				  {% csrf_token %}
+				  <div class="col-3 mt-4">
+					  <input class="form-control mb-3" name="date" value="{{order.date}}"  type="date" placeholder="date" aria-label="date" >
+				  </div>
+				  <div class="col-3 mt-4">
+					  <select name="room" class="form-control  m mb-3" >
+						  {% for i in room %}
+						  <option value="{{i.id}}">{{i.number}}</option>
+						  {%endfor%}
+					  </select>
+				  </div>
+				  <div class="col-3 mt-4">
+					  <select name="owner" class="form-control  m mb-3" >
+						  {% for i in owner %}
+						  <option value="{{i.id}}"><span class="badge bg-info">{{i.phone}}</span>{{i.name}}</option>
+						  {%endfor%}
+					  </select>
+				  </div>
+				  <div class="col-3 mt-4">
+					  <button type="submit" class="btn btn-info px-5">Save</button>
+				  </div>
+			  </form>
+			  {% endif %}
+		  </div>
+	   </div>
+	</div>
+</div>
+
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'waiter/base.html' %}
+{% block content %}
+		<!--start page wrapper -->
+		<div class="">
+			<div class="page-content">
+				<div class="row">
+					<div class="col-xl-9 mx-auto">
+						<div class="row">
+                    <div class="col-lg-8 mx-auto">
+						<div class="card">
+							<div class="card-header px-4 py-3">
+							</div>
+							<div class="card-body p-4">
+								<h5 class="mb-0">Add Order</h5>
+								<form action="{% url 'add_order_item' pk %}" method="post">
+									{% csrf_token %}
+									<div class="row mb-3">
+										<label class="col-sm-3 col-form-label">Enter product</label>
+										<div class="col-sm-9">
+											<select class="form-select" name="maxsulot">
+												<option selected="" disabled="" value="None">Product</option>
+												{% for i in maxsulot %}
+												<option value="{{ i.id }}">{{ i.name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label class="col-sm-3 col-form-label">Product quantity</label>
+										<div class="col-sm-9">
+											<input type="number" class="form-control" name="quantity" placeholder="Product quantity">
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="input35" class="col-sm-3 col-form-label">Enter meal</label>
+										<div class="col-sm-9">
+											<select class="form-select" id="input39" name="meal">
+												<option selected="" disabled="" value="None">Meal</option>
+												{% for i in meal %}
+												<option value="{{ i.id }}">{{ i.name }}</option>
+												{% endfor %}
+											</select>
+										</div>
+									</div>
+									<div class="row mb-3">
+										<label for="input37" class="col-sm-3 col-form-label">Meal quantity</label>
+										<div class="col-sm-9">
+											<input type="number" class="form-control" id="input37" name="meal_quantity" placeholder="Meal quantity">
+										</div>
+									</div>
+									<div class="row ">
+										<label class="col-sm-3 col-form-label "></label>
+										<div class="col-sm-9">
+											<div class="d-md-flex d-grid align-right gap-3">
+												<button type="submit" class="btn btn-primary px-4">Submit</button>
+											</div>
+										</div>
+									</div>
+								</form>
+
+							</div>
+						</div>
+					</div>
+				</div>
+					</div>
+				</div>
+				<!--end row-->
+			</div>
+		</div>
+		<!--end page wrapper -->
+		<!--start overlay-->
+		<div class="overlay toggle-icon"></div>
+		<!--end overlay-->
+		<!--Start Back To Top Button--> <a href="javaScript:;" class="back-to-top"><i class='bx bxs-up-arrow-alt'></i></a>
+		<!--End Back To Top Button-->
+		<footer class="page-footer">
+			<p class="mb-0">Copyright © 2021. All right reserved.</p>
+		</footer>
+	</div>
+	<!--end wrapper-->
+
+{% endblock %}
