@@ -71,4 +71,15 @@ class OrderItem(models.Model):
         order.save()
         super(OrderItem, self).save(*args, **kwargs)
 
+class Bot(models.Model):
+    text = models.TextField()
+    name = models.CharField(max_length=255)
+
+
+class BotDetail(models.Model):
+    text = models.TextField()
+    phone = models.CharField(max_length=255)
+    lat = models.CharField(max_length=255)
+    lng = models.CharField(max_length=255)
+
 
