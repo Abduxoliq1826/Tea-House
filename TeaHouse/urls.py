@@ -10,5 +10,6 @@ urlpatterns = [
     path('director/', include('main.director.urls')),
     path('cooker/', include('main.cooker.urls')),
     path('waiter/', include('main.waiter.urls')),
+    path('api/', include('api.urls')),
     path('call_center/', include('main.call-center.urls')),
 ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -15,8 +15,8 @@ class User(AbstractUser):
     image = models.ImageField(upload_to='user', null=True, blank=True)
 
 class Client(models.Model):
-    name = models.CharField(max_length=255)
-    phone = models.IntegerField(unique=True)
+    name = models.CharField(max_length=255, null=True, blank=True)
+    phone = models.BigIntegerField(unique=True, null=True, blank=True)
 
 class Room(models.Model):
     number = models.IntegerField()
